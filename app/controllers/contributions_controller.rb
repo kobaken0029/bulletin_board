@@ -5,16 +5,11 @@ class ContributionsController < ApplicationController
   # GET /contributions
   # GET /contributions.json
   def index
-    @contributions = Contribution.all
-    @contribution = Contribution.new
+    @contributions = Contribution.order("id DESC").page params[:page]
 
+    @contribution = Contribution.new
     @contribution.contributor = session[:contributor] if session[:contributor]
     @contribution.email = session[:email] if session[:email]
-  end
-
-  # GET /contributions/1
-  # GET /contributions/1.json
-  def show
   end
 
   # GET /contributions/new
@@ -49,7 +44,7 @@ class ContributionsController < ApplicationController
   def update
     respond_to do |format|
       if @contribution.update(contribution_params)
-        format.html { redirect_to @contribution, notice: 'Contribution was successfully updated.' }
+        format.html { redirect_to contributions_url, notice: 'Contribution was successfully updated.' }
         format.json { render :show, status: :ok, location: @contribution }
       else
         format.html { render :edit }

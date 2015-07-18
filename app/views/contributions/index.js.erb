@@ -1,0 +1,7 @@
+$("#contributions").append("<%= escape_javascript(
+    render 'contributions', object: @contributions
+) %>")
+
+$("#more_link").replaceWith("<%= escape_javascript(
+    link_to_next_page(@contributions, 'more', remote: true, id: 'more_link')
+) %>");

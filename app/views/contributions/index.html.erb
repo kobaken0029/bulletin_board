@@ -16,31 +16,34 @@
   <tbody>
     <% @contributions.each do |contribution| %>
       <tr>
-        <td><span class="contribution-id"><%= contribution.id %></span>
-            <span class="contributor"><%= contribution.contributor %></span>
+        <td>
+          <span class="contribution-id"><%= contribution.id %></span>
+          <span class="contributor"><%= contribution.contributor %></span>
         </td>
         <td><%= contribution.email %></td>
-        <td><%= contribution.created_at.strftime("%Y/%m/%d(#{%w(日 月 火 水 木 金 土)[contribution.created_at.wday]})") %></td>
+        <td><%= contribution.created_at.strftime("%Y/%m/%d(#{%w(日 月 火 水 木 金 土)[contribution.created_at.wday]}) %H:%M:%S") %></td>
       </tr>
       <tr>
-        <td colspan=3><%= contribution.text %></td>
+        <td colspan=3><%= simple_format(h(contribution.text)) %></td>
       </tr>
       <tr>
-        <td colspan=3>
-          <hr>
+        <td class="actions-link" colspan=3>
+          <%= link_to 'Edit', edit_contribution_path(contribution) %>
+          <%= link_to 'Destroy', contribution, method: :delete, data: { confirm: 'Are you sure?' } %>
         </td>
-        <!--<td class="actions-link">-->
-          <!--<%= link_to 'Show', contribution %>-->
-          <!--<%= link_to 'Edit', edit_contribution_path(contribution) %>-->
-          <!--<%= link_to 'Destroy', contribution, method: :delete, data: { confirm: 'Are you sure?' } %>-->
-        <!--</td>-->
+      </tr>
+      <tr>
+        <td colspan=3><hr></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
+<div id="paginate">
+  <%= paginate @contributions %>
+</div>
+<!-- <%= link_to_next_page @contributions, 'more', remote: true, id: 'more_link' %> -->
+
 <div>
   <%= render 'form' %>
 </div>
-
-<!--<%= link_to 'New Contribution', new_contribution_path %>-->
