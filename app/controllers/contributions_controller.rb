@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class ContributionsController < ApplicationController
   before_action :set_contribution, only: [:show, :edit, :update, :destroy]
 
@@ -6,6 +7,9 @@ class ContributionsController < ApplicationController
   def index
     @contributions = Contribution.all
     @contribution = Contribution.new
+
+    @contribution.contributor = session[:contributor] if session[:contributor]
+    @contribution.email = session[:email] if session[:email]
   end
 
   # GET /contributions/1
@@ -26,6 +30,8 @@ class ContributionsController < ApplicationController
   # POST /contributions.json
   def create
     @contribution = Contribution.new(contribution_params)
+    session[:contributor] = @contribution.contributor
+    session[:email] = @contribution.email
 
     respond_to do |format|
       if @contribution.save

@@ -1,6 +1,7 @@
 <p id="notice"><%= notice %></p>
 
-<h1><%= t('view.hello') %></h1>
+<!--<h1><%= t('view.title') %></h1>-->
+<h1>掲示板</h1>
 
 <table>
   <!--<thead>-->
@@ -15,9 +16,10 @@
   <tbody>
     <% @contributions.each do |contribution| %>
       <tr>
-        <td><%= contribution.id %><span class="name"><%= contribution.contributor %></span></td>
+        <td><span class="contribution-id"><%= contribution.id %></span>
+            <span class="contributor"><%= contribution.contributor %></span>
+        </td>
         <td><%= contribution.email %></td>
-        <!--<td><%= contribution.created_at.strftime("%Y/%m/%d(%a)") %></td>-->
         <td><%= contribution.created_at.strftime("%Y/%m/%d(#{%w(日 月 火 水 木 金 土)[contribution.created_at.wday]})") %></td>
       </tr>
       <tr>
