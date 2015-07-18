@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Text:</strong>
+  <%= @contribution.text %>
+</p>
+
+<p>
+  <strong>Contributor:</strong>
+  <%= @contribution.contributor %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @contribution.email %>
+</p>
+
+<%= link_to 'Edit', edit_contribution_path(@contribution) %> |
+<%= link_to 'Back', contributions_path %>
