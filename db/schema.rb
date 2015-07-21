@@ -14,11 +14,11 @@
 ActiveRecord::Schema.define(version: 20150718045732) do
 
   create_table "contributions", force: :cascade do |t|
-    t.text     "text"
-    t.string   "contributor"
-    t.string   "email"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.text     "text",        limit: 65535
+    t.string   "contributor", limit: 255
+    t.string   "email",       limit: 255
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
 end
