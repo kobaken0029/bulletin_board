@@ -30,10 +30,11 @@ class ContributionsController < ApplicationController
 
     respond_to do |format|
       if @contribution.save
-        format.html { redirect_to contributions_url, notice: 'Contribution was successfully created.' }
+        format.html { redirect_to contributions_url, notice: '投稿しました' }
         format.json { render :index, status: :created, location: @contribution }
       else
-        format.html { render :new }
+        @contributions = Contribution.order("id DESC").page params[:page]
+        format.html { render :index }
         format.json { render json: @contribution.errors, status: :unprocessable_entity }
       end
     end
@@ -44,7 +45,7 @@ class ContributionsController < ApplicationController
   def update
     respond_to do |format|
       if @contribution.update(contribution_params)
-        format.html { redirect_to contributions_url, notice: 'Contribution was successfully updated.' }
+        format.html { redirect_to contributions_url, notice: '編集しました' }
         format.json { render :show, status: :ok, location: @contribution }
       else
         format.html { render :edit }
@@ -58,7 +59,7 @@ class ContributionsController < ApplicationController
   def destroy
     @contribution.destroy
     respond_to do |format|
-      format.html { redirect_to contributions_url, notice: 'Contribution was successfully destroyed.' }
+      format.html { redirect_to contributions_url, notice: '投稿を削除しました' }
       format.json { head :no_content }
     end
   end
