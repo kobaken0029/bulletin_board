@@ -1,0 +1,40 @@
+<h1><%= t('view.title') %></h1>
+
+<%= render 'form' %>
+
+<p id="notice"><%= notice %></p>
+
+<div>
+  <span id="more-paginate"><%= paginate @contributions %></span>
+</div>
+
+<table class="contributions-table">
+  <tbody>
+    <% @contributions.each do |contribution| %>
+      <tr>
+        <td>
+          <span class="contribution-id"><%= contribution.id %></span>
+          <span class="contributor"><%= contribution.contributor %></span>
+        </td>
+        <td><%= contribution.email %></td>
+        <td><%= l(contribution.created_at, format: :long) %></td>
+      </tr>
+      <tr>
+        <td colspan=3><%= simple_format(h(contribution.text)) %></td>
+      </tr>
+      <tr>
+        <td class="actions-link" colspan=3>
+          <%= link_to 'Edit', edit_contribution_path(contribution) %>
+          <%= link_to 'Destroy', contribution, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+      <tr>
+        <td colspan=3><hr></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div>
+  <span id="more-paginate"><%= paginate @contributions %></span>
+</div>
