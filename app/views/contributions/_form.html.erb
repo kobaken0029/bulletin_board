@@ -14,9 +14,9 @@
 
   <div class="field">
     <%= f.label :contributor %>:
-    <%= f.text_field :contributor, :placeholder => "名前" %>
+    <%= f.text_field :contributor, :placeholder => "名前", :maxlength => 15 %>
     <%= f.label :email %>:
-    <%= f.text_field :email, :placeholder => "mail@example.com" %>
+    <%= f.text_field :email, :placeholder => "mail@example.com", :maxlength => 50 %>
   </div>
   <div class="field">
     <%= f.text_area :text, :size => "70x5", :maxlength => 1000 %>
